@@ -1,0 +1,46 @@
+doctype html
+head
+  meta(charset='UTF-8')
+  meta(name='viewport' content='width=device-width, initial-scale=1.0')
+  title Signup
+  link(rel='stylesheet' href='/signup.css')
+.signup-container
+  //- // header
+  //- .login-header
+  //-   h1 NYONDO General Hardware
+  //-   p Hardware Management System
+  //- // login-card
+  .signup-card
+    h2 Signup
+    
+    form.signup-form(action='/signup' method='post')
+      .form-group
+        //- label Full Name
+        .input-icon-wrapper
+          input(type='text' name='fullName' placeholder='Enter your full name' required='')
+      .form-group
+        //- label Email
+        .input-icon-wrapper
+          input(type='email' name='email' placeholder='Enter your email' required='')
+      .form-group
+        //- label Phone number
+        .input-icon-wrapper
+          input(type='number' name='phone' placeholder='Enter your phone number' required='')      
+      .form-group
+        //- label Password
+        .input-icon-wrapper
+          //- span.input-icon &#x1F512;
+          input(type='password' name='password' placeholder='Enter your password' required='')
+      .form-group
+        //- label Confirm Password
+        .input-icon-wrapper
+          input(type='confirm-password' name='confirmPassword' placeholder='Confirm your password' required='')
+      button.btn-signup(type='submit') Signup
+
+      .auth-footer
+        | Have an account -
+        a(href='/login') Login
+    //- // Footer-links
+    //- .signup-footer
+    //-   a.forgot-link(href='/forgot') Forgot password?
+    //-   a.back-link(href='/') &larr; Back to Home
