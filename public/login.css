@@ -1,5 +1,5 @@
 
-.signup-page {
+.login-page {
     background-color: #f5f5f5;
     background-image: radial-gradient(#d1d1d1 0.5px, transparent 0.5px);
     background-size: 20px 20px;     /* Creates the light diagonal/dot pattern */
@@ -18,12 +18,23 @@ body {
     padding: 20px;
 }
 
-.signup-container {
+.login-container {
     width: 100%;
     max-width: 450px;
 }
 
-.signup-card {
+.login-header {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.login-header h1 {
+    font-size: 1.8rem;
+    margin-bottom: 5px;
+}
+
+
+.login-card {
     background: white;
     padding: 40px;
     border-radius: 16px;
@@ -32,19 +43,11 @@ body {
     box-sizing: border-box;
 }
 
-.signup-card h2 {
-    text-align: center;
-}
+/*Form*/
 
-/* for the one down*/
-.subtitle {
-    color: #777;
-    margin-bottom: 25px;
-    font-size: 0.95rem;
-}
 
-.signup-card select, 
-.signup-card input {
+.login-card select, 
+.login-card input {
     width: 100%;
     padding: 12px 12px 12px 42px;
     border: 1px solid #e0e0e0;
@@ -55,11 +58,11 @@ body {
     transition: border-color 0.2s;
     margin-bottom: 15px;
 }
-.signup-card input:focus {
+.login-card input:focus {
     border-color: aqua;
 }
 
-.signup-card select {
+.login-card select {
     padding-left: 12px;
     appearance: none;
     background-repeat: no-repeat;
@@ -67,7 +70,7 @@ body {
     background-size: 1em;
 }
 
-.btn-signup {
+.btn-login {
     width: 100%;
     padding: 14px;
     background-color: rgb(70, 203, 201); /* Matching the soft red in your image */
@@ -81,16 +84,16 @@ body {
     transition: 0.3s;
 }
 
-.btn-signup:hover {
+.btn-login:hover {
     background-color: purple;
 }
 
-.signup-footer {
+/* .login-footer {
     display: flex;
     justify-content: space-between;
     margin-top: 30px;
     font-size: 0.9rem;
-}
+} */
 
 .auth-footer {
     text-align: center;
@@ -110,10 +113,5 @@ body {
     text-decoration: underline;
     color: purple;
 }
-
-.error-message {
-  color: red;
-  font-size: 0.875rem;
-  margin-bottom: 15px;
-  text-align: center;
-}
+/* .forgot-link { color: #888; text-decoration: none; }
+.back-link { color: #d32f2f; text-decoration: none; font-weight: 600; } */

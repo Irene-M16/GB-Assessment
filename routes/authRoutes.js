@@ -9,36 +9,36 @@ router.get("/signup", (req, res) => {
 
 router.post("/signup", async (req, res) => {
   try {
-    const { fname, lname, email, role, phone, password,} = req.body;
+    const { fullName, email, phone, password, confirmPassword } = req.body;
 
-    if (!terms) {
-      return res.render("signup", { error: "You must agree to the Terms of Service." });
+    // 1. Check passwords match
+    if (!password || !confirmPassword) {
+      return res.render("signup", { error: "Password fields are required." });
+    }
+    if (password !== confirmPassword) {
+      return res.render("signup", { error: "Passwords do not match." });
+    }
+    if (password.length < 8) {
+      return res.render("signup", { error: "Password must be at least 8 characters." });
     }
 
+    // 2. Validate phone (Ugandan number)
+    const phoneRegex = /^(\+256|0)(7\d{8}|4[0-5]\d{7})$/;
+    if (!phoneRegex.test(phone.replace(/\s/g, ""))) {
+      return res.render("signup", { error: "Enter a valid Ugandan phone number." });
+    }
+
+    // 3. Check if email already exists
     const existingUser = await User.findOne({ email: email.toLowerCase() });
     if (existingUser) {
       return res.render("signup", { error: "Email already registered." });
     }
 
-    const phoneRegex = /^(\+256|0)(7\d{8}|4[0-5]\d{7})$/;
-    const ninRegex = /^[A-Z0-9]{14}$/;
-    if (!phoneRegex.test(phone.replace(/\s/g, ''))) {
-      return res.render("signup", { error: "Enter a valid Ugandan phone number." });
-    }
-    if (!ninRegex.test(nin.replace(/\s/g, '').toUpperCase())) {
-      return res.render("signup", { error: "NIN must be exactly 14 characters (letters and numbers only)." });
-    }
-
+    // 4. Register user (passport-local-mongoose handles hashing)
     const newUser = new User({
-      fname,
-      lname,
+      fullName,
       email: email.toLowerCase(),
-      role: role.toLowerCase(),
       phone,
-      nin: nin.toUpperCase(),
-      terms: true,
-      notification: true,
-      status: 'Active',
     });
 
     await User.register(newUser, password);
@@ -57,14 +57,13 @@ router.get("/login", (req, res) => {
 router.post("/login", passport.authenticate("local", {
   failureRedirect: "/login",
 }), (req, res) => {
-
-  return res.redirect('/');
+  return res.redirect("/");
 });
 
-router.get('/logout', (req, res, next) => {
+router.get("/logout", (req, res, next) => {
   req.logout((err) => {
     if (err) return next(err);
-    res.redirect('/');
+    res.redirect("/signup");
   });
 });
 
