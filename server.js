@@ -37,9 +37,9 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 // passport configurations
-// passport.use(User.createStrategy());
-// passport.serializeUser(User.serializeUser());
-// passport.deserializeUser(User.deserializeUser());
+passport.use(User.createStrategy());
+passport.serializeUser(User.serializeUser());
+passport.deserializeUser(User.deserializeUser());
 
 // global variable to make the logged in user available to all pug templates
 app.use((req,res,next) => {
