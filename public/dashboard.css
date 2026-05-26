@@ -1,0 +1,122 @@
+body {
+  font-family: Arial, sans-serif;
+  background: #f5f5f5;
+  margin: 0;
+  padding: 20px;
+}
+
+.dashboard {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: auto auto;
+  gap: 20px;
+}
+
+.left-panel { grid-column: 1; }
+.right-panel { grid-column: 2; }
+.table-section {
+  grid-column: 1 / -1;
+}
+
+.stat-card {
+  background: white;
+  border-radius: 8px;
+  padding: 20px;
+  margin-bottom: 20px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+.stat-card h2 { font-size: 1.4rem; margin: 0; }
+.stat-card p { color: #888; margin: 4px 0 0; }
+.green { color: rgb(70, 203, 201); }
+.red { color: red; }
+
+.form-card {
+  background: white;
+  border-radius: 8px;
+  padding: 20px;
+}
+
+.form-card h3 { margin-top: 0; }
+
+.form-card input {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 12px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  box-sizing: border-box;
+  font-size: 0.95rem;
+}
+
+.form-actions { display: flex; gap: 10px; }
+
+.btn-save {
+  flex: 1;
+  padding: 12px;
+  background: orange;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.btn-clear {
+  flex: 1;
+  padding: 12px;
+  background: #ccc;
+  color: #333;
+  border: none;
+  border-radius: 6px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.alert-success {
+  background: green;
+  color: white;
+  padding: 12px;
+  border-radius: 6px;
+  margin-bottom: 15px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.alert-success a {
+  color: white;
+  text-decoration: none;
+  font-weight: 700;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  background: white;
+}
+
+thead { background: #111; color: white; }
+th, td { padding: 12px 16px; text-align: center; border-bottom: 1px solid #eee; }
+
+.form-card input:invalid:not(:placeholder-shown) {
+  border-color: red;
+}
+
+.form-card input:invalid:not(:placeholder-shown) + .error-msg {
+  display: block;
+}
+
+.error-msg {
+  display: none;
+  color: red;
+  font-size: 0.8rem;
+  margin-top: -8px;
+  margin-bottom: 10px;
+}
+
+.form-card input.input-error {
+  border-color: red;
+}

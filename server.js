@@ -49,17 +49,10 @@ app.use((req,res,next) => {
 
 
 //5. ROUTES
-// //for index
-// app.use("/", require("./routes/indexRoutes"));
-// //for stock
-// app.use("/", require("./routes/stockRoutes"));
-// //for sales
-// app.use("/", require("./routes/salesRoutes"));
-// //for admin
-// app.use("/", require("./routes/adminRoutes"));
 //for auth
 app.use("/", require("./routes/authRoutes"));
-
+//for products
+app.use("/", require("./routes/productRoutes"));
 
 
 

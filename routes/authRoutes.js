@@ -4,7 +4,7 @@ const passport = require("passport");
 const User = require("../models/Signup");
 
 router.get("/signup", (req, res) => {
-  res.render("signup");
+  res.render("signup", { success: req.query.success });
 });
 
 router.post("/signup", async (req, res) => {

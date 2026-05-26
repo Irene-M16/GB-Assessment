@@ -1,24 +1,61 @@
 doctype html
-head
-  meta(charset='UTF-8')
-  meta(name='viewport' content='width=device-width, initial-scale=1.0')
-  title Login
-  link(rel='stylesheet' href='/login.css')
-.login-container
-  // header
-  .login-header
-    h1 Login
-  // login-card
-  .login-card
-    form.login-form(action='/login' method='post')
-      .form-group
-        .input-icon-wrapper
-          input(type='email' name='email' placeholder='Enter your email' required='')    
-      .form-group
-        .input-icon-wrapper
-          input(type='password' name='password' placeholder='Enter your password' required='')
-      button.btn-login(type='submit') LOGIN
-    // Footer-links
-    .auth-footer
-        | Don't have an account -
-        a(href='/signup') Signup
+html
+  head
+    meta(charset='UTF-8')
+    meta(name='viewport' content='width=device-width, initial-scale=1.0')
+    title Login
+    link(rel='stylesheet' href='/login.css')
+  body
+    .login-container
+      .login-card
+        h2 Login
+
+        if error
+          .alert-error
+            span= error
+
+        form(action='/login' method='post' novalidate)
+          .form-group
+            input(
+              type='email'
+              name='email'
+              placeholder='Email'
+            )
+
+          .form-group
+            input(
+              type='password'
+              name='password'
+              placeholder='Password'
+            )
+
+          button.btn-login(type='submit') LOGIN
+
+          .auth-footer
+            | Don't have an account? -
+            a(href='/signup') Signup
+
+    script.
+      const form = document.querySelector('form');
+      const inputs = form.querySelectorAll('input');
+
+      form.addEventListener('submit', function(e) {
+        let valid = true;
+        inputs.forEach(input => {
+          if (!input.value.trim()) {
+            input.classList.add('input-error');
+            valid = false;
+          } else {
+            input.classList.remove('input-error');
+          }
+        });
+        if (!valid) e.preventDefault();
+      });
+
+      inputs.forEach(input => {
+        input.addEventListener('input', function() {
+          if (input.value.trim()) {
+            input.classList.remove('input-error');
+          }
+        });
+      });

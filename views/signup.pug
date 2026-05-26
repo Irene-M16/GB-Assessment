@@ -1,66 +1,88 @@
 doctype html
-head
-  meta(charset='UTF-8')
-  meta(name='viewport' content='width=device-width, initial-scale=1.0')
-  title Signup
-  link(rel='stylesheet' href='/signup.css')
+html
+  head
+    meta(charset='UTF-8')
+    meta(name='viewport' content='width=device-width, initial-scale=1.0')
+    title Signup
+    link(rel='stylesheet' href='/signup.css')
+  body
+    .signup-container
+      .signup-card
+        h2 Signup
 
-.signup-container
-  .signup-card
-    h2 Signup
+        if success
+          .alert-success
+            span Account created successfully! –
+            a(href='/login') Login
+            a.close-alert(href='/signup') X
 
-    if error
-      p.error-message= error
+        if error
+          .alert-error
+            span= error
 
-    form.signup-form(action='/signup' method='post')
+        form.signup-form(action='/signup' method='post' novalidate)
+          .form-group
+            input(
+              type='text'
+              name='fullName'
+              placeholder='Full Name'
+            )
 
-      .form-group
-        .input-icon-wrapper
-          input(
-            type='text'
-            name='fullName'
-            placeholder='Enter your full name'
-            required=''
-          )
+          .form-group
+            input(
+              type='email'
+              name='email'
+              placeholder='Email'
+            )
 
-      .form-group
-        .input-icon-wrapper
-          input(
-            type='email'
-            name='email'
-            placeholder='Enter your email'
-            required=''
-          )
+          .form-group
+            input(
+              type='text'
+              name='phone'
+              placeholder='Phone Number'
+            )
 
-      .form-group
-        .input-icon-wrapper
-          input(
-            type='text'
-            name='phone'
-            placeholder='Enter your phone number'
-            required=''
-          )
+          .form-group
+            input(
+              type='password'
+              name='password'
+              placeholder='Password'
+            )
 
-      .form-group
-        .input-icon-wrapper
-          input(
-            type='password'
-            name='password'
-            placeholder='Enter your password'
-            required=''
-          )
+          .form-group
+            input(
+              type='password'
+              name='confirmPassword'
+              placeholder='Confirm Password'
+            )
 
-      .form-group
-        .input-icon-wrapper
-          input(
-            type='password'
-            name='confirmPassword'
-            placeholder='Confirm your password'
-            required=''
-          )
+          button.btn-signup(type='submit') SIGNUP
 
-      button.btn-signup(type='submit') SIGNUP
+          .auth-footer
+            | Have an account? -
+            a(href='/login') Login
 
-      .auth-footer
-        | Have an account -
-        a(href='/login') Login
+    script.
+      const form = document.querySelector('form');
+      const inputs = form.querySelectorAll('input');
+
+      form.addEventListener('submit', function(e) {
+        let valid = true;
+        inputs.forEach(input => {
+          if (!input.value.trim()) {
+            input.classList.add('input-error');
+            valid = false;
+          } else {
+            input.classList.remove('input-error');
+          }
+        });
+        if (!valid) e.preventDefault();
+      });
+
+      inputs.forEach(input => {
+        input.addEventListener('input', function() {
+          if (input.value.trim()) {
+            input.classList.remove('input-error');
+          }
+        });
+      });

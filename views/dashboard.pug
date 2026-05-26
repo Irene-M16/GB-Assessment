@@ -1,0 +1,96 @@
+doctype html
+html
+  head
+    meta(charset='UTF-8')
+    meta(name='viewport' content='width=device-width, initial-scale=1.0')
+    title Dashboard
+    link(rel='stylesheet' href='/dashboard.css')
+  body
+    .dashboard
+      .left-panel
+        .stat-card
+          h2 UGX 50,000,000
+          p Sales
+          h2 UGX 15,000,000
+          p Orders
+
+        .stat-card
+          h2.green UGX #{inStockValue.toLocaleString()}
+          p In stock
+          h2.red #{outOfStockCount}
+          p Out of stock
+
+      .right-panel
+        .form-card
+          h3 Add Product
+
+          if success
+            .alert-success
+              span Product has been added successfully!
+              a(href='/') x
+
+          form(action='/add-product' method='POST' novalidate)
+            input(type='text' name='name' placeholder='Product Name')
+            span.error-msg Invalid field
+
+            input(type='text' name='category' placeholder='Category')
+            span.error-msg Invalid field
+
+            input(type='number' name='price' placeholder='Price')
+            span.error-msg Invalid field
+
+            input(type='number' name='quantity' placeholder='Quantity')
+            span.error-msg Invalid field
+
+            input(type='text' name='color' placeholder='Color')
+            span.error-msg Invalid field
+
+            .form-actions
+              button.btn-save(type='submit') SAVE
+              button.btn-clear(type='reset') CLEAR
+
+      .table-section
+        table
+          thead
+            tr
+              th ID
+              th NAME
+              th CATEGORY
+              th PRICE (UGX)
+              th QUANTITY
+          tbody
+            each product in products
+              tr
+                td ##{product._id.toString().slice(-6).toUpperCase()}
+                td= product.name
+                td= product.category
+                td= product.price.toLocaleString()
+                td= product.quantity
+
+    script.
+      const form = document.querySelector('form');
+      const inputs = form.querySelectorAll('input');
+
+      form.addEventListener('submit', function(e) {
+        let valid = true;
+        inputs.forEach(input => {
+          if (!input.value.trim()) {
+            input.classList.add('input-error');
+            input.nextElementSibling.style.display = 'block';
+            valid = false;
+          } else {
+            input.classList.remove('input-error');
+            input.nextElementSibling.style.display = 'none';
+          }
+        });
+        if (!valid) e.preventDefault();
+      });
+
+      inputs.forEach(input => {
+        input.addEventListener('input', function() {
+          if (input.value.trim()) {
+            input.classList.remove('input-error');
+            input.nextElementSibling.style.display = 'none';
+          }
+        });
+      });
