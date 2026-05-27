@@ -3,11 +3,11 @@ const router = express.Router();
 const passport = require("passport");
 const User = require("../models/Signup");
 
-router.get("/signup", (req, res) => {
+router.get("/", (req, res) => {
   res.render("signup", { success: req.query.success });
 });
 
-router.post("/signup", async (req, res) => {
+router.post("/", async (req, res) => {
   try {
     const { fullName, email, phone, password, confirmPassword } = req.body;
 
@@ -65,13 +65,6 @@ router.get("/success", (req, res) => {
     return res.redirect("/login");
   }
   res.render("success");
-});
-
-router.get("/logout", (req, res, next) => {
-  req.logout((err) => {
-    if (err) return next(err);
-    res.redirect("/signup");
-  });
 });
 
 module.exports = router;

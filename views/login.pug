@@ -16,24 +16,15 @@ html
 
         form(action='/login' method='post' novalidate)
           .form-group
-            input(
-              type='email'
-              name='email'
-              placeholder='Email'
-            )
+            input(type='email' name='email' placeholder='Email')
 
           .form-group
-            input(
-              type='password'
-              name='password'
-              placeholder='Password'
-            )
-
+            input(type='password' name='password' placeholder='Password')
           button.btn-login(type='submit') LOGIN
 
           .auth-footer
             | Don't have an account? -
-            a(href='/signup') Signup
+            a(href='/') Signup
 
     script.
       const form = document.querySelector('form');

@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const Product = require('../models/Product');
 
-router.get('/', async (req, res) => {
+router.get('/dashboard', async (req, res) => {
   try {
     const products = await Product.find().sort({ createdAt: -1 });
     const inStock = products.filter(p => p.quantity > 0);
@@ -25,10 +25,10 @@ router.post('/add-product', async (req, res) => {
   try {
     const { name, category, price, quantity, color } = req.body;
     await Product.create({ name, category, price, quantity, color });
-    res.redirect('/?success=true');
+    res.redirect('/dashboard');
   } catch (err) {
     console.error(err);
-    res.redirect('/');
+    res.redirect('/dashboard');
   }
 });
 
